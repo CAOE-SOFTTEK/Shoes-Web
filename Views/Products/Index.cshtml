@@ -1,0 +1,58 @@
+﻿@model List<Shoes.Models.ViewModels.ListProductsViewModel>
+@{
+    ViewBag.Title = "Shoes Web";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <a href="~/Tabla/Nuevo" class="btn btn-primary">Nuevo</a>
+
+</div>
+<br />
+<div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>IdType</th>
+                    <th>IdColor</th>
+                    <th>IdBrand</th>
+                    <th>IdProvider</th>
+                    <th>IdCatalog</th>
+                    <th>Titulo</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Observaciones</th>
+                    <th>Precio de distribuidor</th>
+                    <th>Precio de cliente</th>
+                    <th>Precio de miembro</th>
+                    <th>Activo</th>
+                    <th>Keywords</th>
+                    <th>Fecha</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.IdType</td>
+                        <td>@item.IdColor</td>
+                        <td>@item.IdBrand</td>
+                        <td>@item.IdProvider</td>
+                        <td>@item.IdCatalog</td>
+                        <td>@item.Title</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Description</td>
+                        <td>@item.Observations</td>
+                        <td>@item.PriceDistributor</td>
+                        <td>@item.PriceClient</td>
+                        <td>@item.PriceMember</td>
+                        <td>@item.IsEnabled</td>
+                        <td>@item.Keywords</td>
+                        <td>@item.DateUpdate</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+
+</div>
