@@ -39,5 +39,50 @@ namespace Shoes.Controllers
             }
                 return View(lista);
         }
+
+        public ActionResult Nuevo()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Nuevo(ProductViewModel model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    using (DataProductsEntities db = new DataProductsEntities())
+                    {
+                        var oProduct = new Products();
+                            oProduct.Id = model.Id;
+                        oProduct.IdType = model.IdType;
+                        oProduct.IdColor = model.IdColor;
+                        oProduct.IdBrand = model.IdBrand;
+                        oProduct.IdProvider = model.IdProvider;
+                        oProduct.IdCatalog = model.IdCatalog;
+                        oProduct.Title = model.Title;
+                        oProduct.Nombre = model.Nombre;
+                        oProduct.Description = model.Description;
+                        oProduct.Observations = model.Observations;
+                        oProduct.PriceDistributor = model.PriceDistributor;
+                        oProduct.PriceClient = model.PriceClient;
+                        oProduct.PriceMember = model.PriceMember;
+                        oProduct.IsEnabled = model.IsEnabled;
+                        oProduct.Keywords = model.Keywords;
+                        oProduct.DateUpdate = model.DateUpdate;
+                        db.Products.Add(oProduct);
+                        db.SaveChanges();
+                    }
+                    return Redirect("~/Products/");
+                }
+                return View(model);
+
+            }
+            catch(Exception ex)
+            {
+                throw new System.Exception(ex.Message);
+            }
+        }
+
     }
 }
