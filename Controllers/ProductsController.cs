@@ -83,6 +83,80 @@ namespace Shoes.Controllers
                 throw new System.Exception(ex.Message);
             }
         }
+        public ActionResult Editar(int Id)
+        {
+            ProductViewModel model = new ProductViewModel();
+            using (DataProductsEntities db = new DataProductsEntities())
+            {
+                var oProduct = db.Products.Find(Id);
+                model.Id = oProduct.Id;
+                model.Title = oProduct.Title;
+                model.Nombre = oProduct.Nombre;
+                model.Description = oProduct.Description;
+                model.Observations = oProduct.Observations;
+                model.PriceDistributor = oProduct.PriceDistributor;
+                model.PriceClient = oProduct.PriceClient;
+                model.PriceMember = oProduct.PriceMember;
+                model.IsEnabled = oProduct.IsEnabled;
+                model.Keywords = oProduct.Keywords;
+                model.DateUpdate = oProduct.DateUpdate;
+
+            }
+                return View(model);
+        }
+        [HttpPost]
+        public ActionResult Editar(ProductViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (DataProductsEntities db = new DataProductsEntities())
+                    {
+                        var oProduct = db.Products.Find(model.Id);
+                        oProduct.Id = model.Id;
+                        oProduct.IdType = model.IdType;
+                        oProduct.IdColor = model.IdColor;
+                        oProduct.IdBrand = model.IdBrand;
+                        oProduct.IdProvider = model.IdProvider;
+                        oProduct.IdCatalog = model.IdCatalog;
+                        oProduct.Title = model.Title;
+                        oProduct.Nombre = model.Nombre;
+                        oProduct.Description = model.Description;
+                        oProduct.Observations = model.Observations;
+                        oProduct.PriceDistributor = model.PriceDistributor;
+                        oProduct.PriceClient = model.PriceClient;
+                        oProduct.PriceMember = model.PriceMember;
+                        oProduct.IsEnabled = model.IsEnabled;
+                        oProduct.Keywords = model.Keywords;
+                        oProduct.DateUpdate = model.DateUpdate;
+                        db.Entry(oProduct).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    return Redirect("~/Products/");
+                }
+                return View(model);
+
+            }
+            catch (Exception ex)
+            {
+                throw new System.Exception(ex.Message);
+            }
+        }
+        [HttpGet]
+        public ActionResult Eliminar(int Id)
+        {
+            ProductViewModel model = new ProductViewModel();
+            using (DataProductsEntities db = new DataProductsEntities())
+            {
+                var oProduct = db.Products.Find(Id);
+                
+                db.Products.Remove(oProduct);
+                    db.SaveChanges();
+
+            }
+            return Redirect("~/Products/");
+        }
 
     }
 }

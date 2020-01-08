@@ -30,6 +30,7 @@
                     <th>Activo</th>
                     <th>Keywords</th>
                     <th>Fecha</th>
+                    <th></th>
                 </tr>
                 @foreach (var item in Model)
                 {
@@ -50,6 +51,10 @@
                         <td>@item.IsEnabled</td>
                         <td>@item.Keywords</td>
                         <td>@item.DateUpdate</td>
+                        <th>
+                            <a class="btn btn-primary" href="~/Products/Editar/@item.Id">Editar</a>
+                            <a class="btn btn-danger" href="~/Products/Eliminar/@item.Id">Eliminar</a>
+                        </th>
                     </tr>
                 }
             </table>
